@@ -14,9 +14,9 @@ interface InterviewRoomProps {
 const interviewQuestions = {
   "Product Sense": {
     Entry: [
-      "How would you improve Instagram for creators?",
-      "Design a product for helping college students find study groups.",
-      "What metrics would you use to measure success of YouTube Shorts?",
+      "Given your software engineering background, how would you approach improving a developer tool like GitHub? What technical considerations would influence your product decisions?",
+      "As someone with CS experience, how would you design a product that helps developers collaborate more effectively? Walk me through how your technical knowledge informs your product thinking.",
+      "As someone transitioning from engineering to PM, how would you leverage your understanding of system architecture and technical constraints when prioritizing features for a developer-facing product?",
     ],
     "Mid-Level": [
       "How would you improve Instagram for creators?",
@@ -531,6 +531,28 @@ export default function InterviewRoom({ config, onComplete }: InterviewRoomProps
     getFollowUpQuestion,
     currentFollowUp,
   ])
+
+  // Auto-advance when user finishes speaking
+  useEffect(() => {
+    if (!isRecording || aiSpeaking || !isMicOn) return
+
+    // Only auto-advance if user has stopped speaking and there's a transcript
+    if (!userSpeaking && transcript.trim().length > 0) {
+      const wordCount = transcript.split(/\s+/).filter((w) => w.length > 0).length
+      
+      // Only auto-advance if there's a meaningful response (at least 5 words)
+      if (wordCount >= 5) {
+        const autoAdvanceTimeout = setTimeout(() => {
+          // Double-check conditions before auto-advancing
+          if (!userSpeaking && !aiSpeaking && isRecording && transcript.trim().length > 0) {
+            handleNextQuestion()
+          }
+        }, 4000) // Wait 4 seconds of silence before auto-advancing
+
+        return () => clearTimeout(autoAdvanceTimeout)
+      }
+    }
+  }, [userSpeaking, transcript, isRecording, aiSpeaking, isMicOn, handleNextQuestion])
 
   const calculateResponseScore = (response: string, questionType: string) => {
     if (!response || response.trim().length === 0) {

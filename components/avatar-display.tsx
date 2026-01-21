@@ -17,7 +17,9 @@ export default function AvatarDisplay({ speaking }: AvatarDisplayProps) {
           className={`w-32 h-32 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 relative border-2 border-amber-300 shadow-md ${speaking ? "scale-105 transition-transform" : "transition-transform"}`}
         >
           {/* Eyes */}
-          <div className="absolute top-10 left-8 w-4 h-4 bg-foreground rounded-full"></div>
+          <div
+            className={`absolute top-10 left-8 w-4 h-4 bg-foreground rounded-full transition-transform ${speaking ? "" : "avatar-blink"}`}
+          ></div>
           <div
             className={`absolute top-10 right-8 w-4 h-4 bg-foreground rounded-full transition-transform ${speaking ? "" : "avatar-blink"}`}
           ></div>

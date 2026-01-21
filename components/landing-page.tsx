@@ -10,7 +10,7 @@ interface LandingPageProps {
 
 export default function LandingPage({ onStart }: LandingPageProps) {
   const [typedWord, setTypedWord] = useState("")
-  const words = ["PM", "Consulting", "Case"]
+  const words = ["Clarity", "Structure", "Precision"]
   const [wordIndex, setWordIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -161,14 +161,6 @@ export default function LandingPage({ onStart }: LandingPageProps) {
       {/* Hero Section */}
       <section className="grid-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-green-50 border border-green-200 rounded-full px-4 py-2 mb-8">
-            <span className="text-lg">🎯</span>
-            <span className="text-sm font-medium text-green-700 uppercase tracking-wide">
-              From CS to PM & Consulting
-            </span>
-          </div>
-
           {/* Main Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 leading-tight text-balance">
             Break Into Product & Consulting <br className="hidden md:block" />
